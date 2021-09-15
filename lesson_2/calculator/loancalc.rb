@@ -6,11 +6,11 @@ def prompt(message)
 end
 
 def valid_number?(num)
-  num.kind_of? Float
+  num.is_a?(Float)
 end
 
 def number?(num)
-  num.kind_of? Float || Integer
+  num.is_s?(Float || Integer)
 end
 
 loanamount = ""
@@ -29,37 +29,37 @@ loop do
   end
 end
 
+loop do
   loop do
-    loop do
-      prompt("Please enter your required loan amount.. ")
-      loanamount = gets.chomp.to_f
-      if valid_number?(loanamount)
-        break
-      else
-        prompt("You didn't enter a valid loan amount!")
-      end
+    prompt("Please enter your required loan amount.. ")
+    loanamount = gets.chomp.to_f
+    if valid_number?(loanamount)
+      break
+    else
+      prompt("You didn't enter a valid loan amount!")
     end
+  end
 
-    loop do
-      prompt("Please enter your APR Rate.. ")
-      apr = gets.chomp
-      apr = "0.0#{apr}".to_f
-      if valid_number?(apr)
-        break
-      else
-        prompt("You didn't enter a valid APR Rate!")
-      end
+  loop do
+    prompt("Please enter your APR Rate.. ")
+    apr = gets.chomp
+    apr = "0.0#{apr}".to_f
+    if valid_number?(apr)
+      break
+    else
+      prompt("You didn't enter a valid APR Rate!")
     end
+  end
 
-    loop do
-      prompt("Please enter your loan duration in years.. ")
-      duration = gets.chomp.to_f
-      if valid_number?(duration)
-        break
-      else
-        prompt("You didn't enter a valid loan duration!")
-      end
+  loop do
+    prompt("Please enter your loan duration in years.. ")
+    duration = gets.chomp.to_f
+    if valid_number?(duration)
+      break
+    else
+      prompt("You didn't enter a valid loan duration!")
     end
+  end
 
   puts "Your requested loan amount is £#{loanamount}"
   puts "Your APR Rate is #{apr}%"
@@ -67,11 +67,12 @@ end
 
   puts "Calculating the loan..."
   sleep(1)
-  
+
   periods = duration * 12
   monthlyinterest = apr / 12
 
-  payment = loanamount * (monthlyinterest / (1 - (1 + monthlyinterest)**(-periods)))
+  payment = loanamount * (monthlyinterest / (1 -
+    (1 + monthlyinterest)**(-periods)))
   payment = payment.floor(2)
 
   periods =  periods.to_i
